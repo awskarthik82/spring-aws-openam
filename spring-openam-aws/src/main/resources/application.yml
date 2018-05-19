@@ -1,0 +1,24 @@
+server:
+  port: 9080
+cognitoIdentityId: <identity pool ID>
+cognitoProvider: cognito-idp.us-east-1.amazonaws.com/<User pool ID>
+cognitoRegion: us-east-1
+spring:
+ thymeleaf:
+   cache: false
+ security:
+   oauth2:
+     client:
+       registration:
+         cognito:
+           client-id: <user pool app client openamagent id>
+           client-secret: <app client openam agent secret>
+           authorization-grant-type: authorization_code
+           redirect-uri-template: '{baseUrl}/login/oauth2/code/{registrationId}'
+           scope: openid, profile
+           client-name: Cognito App
+       provider:
+         cognito:
+           authorization-uri: <user pool domain URL>/oauth2/authorize
+           token-uri: <user pool domain URL>/oauth2/token
+           jwk-set-uri: https://cognito-idp.us-east-1.amazonaws.com/<user pool ID>/.well-known/jwks.json

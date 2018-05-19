@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<title>Spring Security - OAuth 2.0 S3 Bucket List</title>
+<meta charset="utf-8" />
+</head>
+<body>
+	<div th:substituteby="index::logout"></div>
+	<h1>S3 Bucket List</h1>
+	<div>
+		<ul>
+			<li th:each="bucket : ${s3buckets}">
+				<span style="font-weight: bold" th:text="${bucket.key}" />
+				<ul>
+					<li th:each="object : ${bucket.value}">
+						<span th:text="${object}" />
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>
